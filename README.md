@@ -12,7 +12,7 @@ A RESTful API built using **Spring Boot** for managing police registered dogs. T
 | Spring Boot       | 4.0.7    |
 | Spring Web        | Included |
 | Spring Data JPA   | Included |
-| MySQL             | 8.x      |
+| MySQL             | 8.0      |
 | Maven             | Latest   |
 | Lombok            | 1.18.38  |
 | MapStruct         | 1.6.3    |
@@ -112,8 +112,8 @@ Example:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/dogsdb
-spring.datasource.username=dogsuser
-spring.datasource.password=dogspassword
+spring.datasource.username=dogs_user
+spring.datasource.password=dogs_password
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
@@ -398,9 +398,7 @@ Example response:
 Handled exceptions include:
 
 * Resource not found
-* Invalid request
-* Validation failures
-* Invalid filter JSON
+* Bad request
 * IllegalArgumentException
 
 ---
@@ -423,7 +421,7 @@ Lookup data is automatically inserted by the `DataInitializer` on application st
 The API can be tested using:
 
 * Swagger UI
-* Postman
+
 
 Suggested testing flow:
 
@@ -432,7 +430,7 @@ Suggested testing flow:
 3. Start the application.
 4. Allow JPA to create the tables.
 5. Execute `insert_sample_data.sql`.
-6. Open Swagger UI or Postman.
+6. Open Swagger UI 
 7. Test CRUD operations, filtering, pagination, lookup APIs, validation, and soft delete.
 
 ---
