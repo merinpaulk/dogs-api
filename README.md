@@ -167,7 +167,7 @@ This inserts sample dog records for testing.
 Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/dogs.git
+git clone https://github.com/merinpaulk/dogs-api.git
 ```
 
 Navigate to the project:
