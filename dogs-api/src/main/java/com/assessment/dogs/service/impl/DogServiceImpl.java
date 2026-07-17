@@ -12,6 +12,8 @@ import com.assessment.dogs.specification.DogFilterSpecification;
 
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -146,6 +148,7 @@ public class DogServiceImpl implements DogService {
 
         }
 
+        validateDogStatus(dog.getStatus(), dog.getLeavingReason(), request.getLeavingDate());
 
         Dog updatedDog = dogRepository.save(dog);
 
@@ -225,6 +228,41 @@ public class DogServiceImpl implements DogService {
                         )
                 );
 
+    }
+    
+    private void validateDogStatus(
+            Status status,
+            LeavingReason leavingReason,
+            LocalDate leavingDate) {
+
+        if ("Left".equalsIgnoreCase(status.getName())) {
+
+            if (leavingReason == null) {
+                throw new IllegalArgumentException(
+                        "Leaving reason is required when status is 'Left'."
+                );
+            }
+
+            if (leavingDate == null) {
+                throw new IllegalArgumentException(
+                        "Leaving date is required when status is 'Left'."
+                );
+            }
+
+        } else {
+
+            if (leavingReason != null) {
+                throw new IllegalArgumentException(
+                        "Leaving reason can only be provided when status is 'Left'."
+                );
+            }
+
+            if (leavingDate != null) {
+                throw new IllegalArgumentException(
+                        "Leaving date can only be provided when status is 'Left'."
+                );
+            }
+        }
     }
 
 }
